@@ -2,7 +2,6 @@
 
   import HeaderComp from './components/HeaderComp.vue';
   import MainComp from './components/MainComp.vue';
-  import {store} from './store'
 
   export default{
     name: "App",
@@ -13,7 +12,7 @@
 
     data(){
       return{
-        store
+        
       }
     }
   }

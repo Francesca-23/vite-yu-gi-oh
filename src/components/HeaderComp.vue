@@ -15,7 +15,7 @@
 <style scoped lang="scss">
 
     h1{
-        padding: 1.5rem;
+        padding: 1rem 5rem;
     }
 
 </style>

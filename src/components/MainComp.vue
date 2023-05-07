@@ -39,9 +39,14 @@
 
     <div class="big-container">
 
+        <select name="cards" id="">
+            <option value="Alien">Alien</option>
+            <option value="Other">Other</option>
+        </select>
+
         <div class="container">
             <div class="cards-number">
-                <p>number cards</p>
+                <p>Found {{ store.array.length }} cards</p>
             </div>
             <div class="cards">
                 <Cards v-for="(element, index) in store.array" :key="index"
@@ -59,6 +64,16 @@
     .big-container{
         background-color: #d48f38;
         padding: 2rem 0;
+
+        select{
+            padding: 0.5rem 0;
+            padding-right: 3rem;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            margin-left: 5rem;
+        }
         .container{
             width: 90%;
             margin: auto;
@@ -71,6 +86,9 @@
                 color: white;
             }
             .cards{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
     
             }
         }
