@@ -3,16 +3,18 @@
     import Cards from './Cards.vue';
     import axios, {isCancel, AxiosError} from 'axios';
     import {store} from '../store'
+    import SelectComp from './SelectComp.vue'
 
     export default{
         name: "MainComp",
         components: {
-            Cards
+            Cards,
+            SelectComp
         },
 
         data(){
             return {
-                store
+                store,
             }
         },
 
@@ -23,12 +25,23 @@
         methods: {
 
             activeApi(){
+                
+                if(store.selected != ''){
+  
+                    axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${store.selected}`).then( (response) => {        
+                        const result = response.data.data
+                        this.store.array = result
+                    })  
 
-                axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=12&offset=1').then( (response) => {
-                    const result = response.data.data
-                    this.store.array = result
-                })  
-            },
+                }else{
+
+                    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=15&offset=1').then( (response) => {
+                        const result = response.data.data
+                        this.store.array = result
+                    })  
+                }
+            }
+
 
         }
     }
@@ -39,10 +52,7 @@
 
     <div class="big-container">
 
-        <select name="cards" id="">
-            <option value="Alien">Alien</option>
-            <option value="Other">Other</option>
-        </select>
+        <SelectComp @filterCards="activeApi()"/>
 
         <div class="container">
             <div class="cards-number">
@@ -65,15 +75,6 @@
         background-color: #d48f38;
         padding: 2rem 0;
 
-        select{
-            padding: 0.5rem 0;
-            padding-right: 3rem;
-            background-color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            margin-left: 5rem;
-        }
         .container{
             width: 90%;
             margin: auto;
